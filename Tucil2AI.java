@@ -28,6 +28,7 @@ import weka.filters.unsupervised.attribute.NumericToNominal;
  * class.
  *
  * @author  Ikhwanul Muslimin
+ * @author  Hafizh Afkar Makmur
  */
 public class Tucil2AI {
   
@@ -116,7 +117,7 @@ public class Tucil2AI {
         System.out.println("Model loaded.");
     }
     
-    public void createInstance() {
+    public void classifyInstance() throws Exception {
         Scanner sc = new Scanner(System.in);
         Instances test = new Instances(dataset,0);
 
@@ -128,7 +129,11 @@ public class Tucil2AI {
         Instance inst = new DenseInstance(1.0, values);
         test.add(inst);
 
-       test.setClassIndex(test.numAttributes() - 1);
+        test.setClassIndex(test.numAttributes() - 1);
+
+        double clsLabel = cls.classifyInstance(test.instance(0));
+        test.instance(0).setClassValue(clsLabel);
+        System.out.println(test.classAttribute().value((int) clsLabel));
     }
     public static void main(String[] args) {
         int pil;
@@ -194,7 +199,12 @@ public class Tucil2AI {
                 }
             } else
             if (pil==5) {
-                test.createInstance();
+                try {
+                    test.classifyInstance();
+                } catch (Exception e) {
+                    System.out.println("Gagal mengklasifikasi.");
+                    System.out.println(e);
+                }
             } else
             if (pil==6) {
                 try {
