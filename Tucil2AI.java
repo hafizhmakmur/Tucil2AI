@@ -108,12 +108,16 @@ public class Tucil2AI {
     
     public void saveModel(String filename) throws Exception {
 	SerializationHelper.write(filename, cls);
+        System.out.println("Model is :");
+        System.out.println(cls);
         System.out.println("Model saved.");
     }
     
     public void loadModel(String filename) throws Exception {
         cls = (Classifier) SerializationHelper.read(filename);
         System.out.println("Model loaded.");
+        System.out.println("Model is :");
+        System.out.println(cls);
     }
     
     public void createInstance() {
@@ -131,12 +135,13 @@ public class Tucil2AI {
         }*/
         dataset.add(inst);
         dataset.setClassIndex(dataset.numAttributes() - 1);
+        System.out.println("Instance saved.");
     }
 
     public void classifyInstance() throws Exception {
         Scanner sc = new Scanner(System.in);
-        Instances test = new Instances(dataset,0);
-
+        Instances test = new Instances(dataset);
+/*
         double[] values = new double[test.numAttributes()];
         values[0] = sc.nextFloat();
         values[1] = sc.nextFloat();
@@ -144,11 +149,12 @@ public class Tucil2AI {
         values[3] = sc.nextFloat();
         Instance inst = new DenseInstance(1.0, values);
         test.add(inst);
-
+*/
         test.setClassIndex(test.numAttributes() - 1);
 
-        double clsLabel = cls.classifyInstance(test.instance(0));
-        test.instance(0).setClassValue(clsLabel);
+        System.out.println(test.instance(test.numInstances()-1));
+        double clsLabel = cls.classifyInstance(test.instance(test.numInstances()-1));
+        test.instance(test.numInstances()-1).setClassValue(clsLabel);
         System.out.println(test.classAttribute().value((int) clsLabel));
     }
     public static void main(String[] args) {
@@ -197,6 +203,7 @@ public class Tucil2AI {
                 //10 Cross Val Split
                 try {
                     test.cls = new J48();
+                    test.cls.buildClassifier(test.dataset);
                     test.train10Fold(test.cls, 10);
                 } catch(Exception e) {
                     System.out.println("Operasi gagal");

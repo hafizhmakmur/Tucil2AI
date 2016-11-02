@@ -1,0 +1,39 @@
+Dataset loaded.
+
+Silakan pilih satu:
+1. Filter Discretize
+2. Filter Numeric to Nominal
+3. 10 Cross Folds Validation
+4. Full training Validation
+5. Instance baru
+6. Save model
+7. Load model
+8. Keluar
+Model loaded.
+Model is :
+J48 pruned tree
+------------------
+
+petalwidth <= 0.6: Iris-setosa (50.0)
+petalwidth > 0.6
+|   petalwidth <= 1.7
+|   |   petallength <= 4.9: Iris-versicolor (48.0/1.0)
+|   |   petallength > 4.9
+|   |   |   petalwidth <= 1.5: Iris-virginica (3.0)
+|   |   |   petalwidth > 1.5: Iris-versicolor (3.0/1.0)
+|   petalwidth > 1.7: Iris-virginica (46.0/1.0)
+
+Number of Leaves  : 	5
+
+Size of the tree : 	9
+
+
+Silakan pilih satu:
+1. Filter Discretize
+2. Filter Numeric to Nominal
+3. 10 Cross Folds Validation
+4. Full training Validation
+5. Instance baru
+6. Save model
+7. Load model
+8. Keluar
