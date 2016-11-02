@@ -27,8 +27,8 @@ import weka.filters.unsupervised.attribute.NumericToNominal;
  * "evaluateClusterer" method of the "weka.clusterers.ClusterEvaluation" 
  * class.
  *
- * @author  Ikhwanul Muslimin
- * @author  Hafizh Afkar Makmur
+ * @author  Ikhwanul Muslimin 13514020
+ * @author  Hafizh Afkar Makmur 13514062
  */
 public class Tucil2AI {
   
@@ -52,6 +52,9 @@ public class Tucil2AI {
 
     }
 
+    public void printDataSet() {
+        System.out.println(dataset);
+    }
     //numeric to nominal
     public void useFilterNtoN() throws IOException, Exception {
     //load training instances
@@ -63,10 +66,8 @@ public class Tucil2AI {
 
         convert.setOptions(options);
         convert.setInputFormat(dataset);
-        System.out.println("BEFORE FILTER NtoN");
-        System.out.println(dataset);
         Instances newData=Filter.useFilter(dataset, convert);
-        System.out.println("AFTER FILTER NtoN");
+        dataset = newData;
         System.out.println(newData);
     }
 
@@ -80,10 +81,8 @@ public class Tucil2AI {
 
         convert.setOptions(options);
         convert.setInputFormat(dataset);
-        System.out.println("BEFORE FILTER Descretize");
-        System.out.println(dataset);
         Instances newData=Filter.useFilter(dataset, convert);
-        System.out.println("AFTER FILTER Descretize");
+        dataset = newData;
         System.out.println(newData);
     }  
 
@@ -117,6 +116,23 @@ public class Tucil2AI {
         System.out.println("Model loaded.");
     }
     
+    public void createInstance() {
+        Scanner sc = new Scanner(System.in).useDelimiter(" ");
+
+        double[] values = new double[dataset.numAttributes()];
+        values[0] = sc.nextFloat();
+        values[1] = sc.nextFloat();
+        values[2] = sc.nextFloat();
+        values[3] = sc.nextFloat();
+        Instance inst = new DenseInstance(1.0, values);
+        /*Instance inst = new DenseInstance();
+        for (int i=0; i<dataset.numAttributes(); i++) {
+            inst.setValue(i, sc.next());
+        }*/
+        dataset.add(inst);
+        dataset.setClassIndex(dataset.numAttributes() - 1);
+    }
+
     public void classifyInstance() throws Exception {
         Scanner sc = new Scanner(System.in);
         Instances test = new Instances(dataset,0);
@@ -153,10 +169,11 @@ public class Tucil2AI {
             System.out.println("2. Filter Numeric to Nominal");
             System.out.println("3. 10 Cross Folds Validation");
             System.out.println("4. Full training Validation");
-            System.out.println("5. Instance baru");
-            System.out.println("6. Save model");
-            System.out.println("7. Load model");
-            System.out.println("8. Keluar");
+            System.out.println("5. Save model");
+            System.out.println("6. Load model");
+            System.out.println("7. Instance baru");
+            System.out.println("8. Pembelajaran");
+            System.out.println("9. Keluar");
             Scanner in = new Scanner(System.in);
             pil = in.nextInt();
             if (pil==1 ) {
@@ -198,15 +215,8 @@ public class Tucil2AI {
                     System.out.println(e.toString());
                 }
             } else
+            
             if (pil==5) {
-                try {
-                    test.classifyInstance();
-                } catch (Exception e) {
-                    System.out.println("Gagal mengklasifikasi.");
-                    System.out.println(e);
-                }
-            } else
-            if (pil==6) {
                 try {
                     test.saveModel("savedmodel.model");
                 } catch (Exception e) {
@@ -214,14 +224,33 @@ public class Tucil2AI {
                     System.out.println(e);
                 }
             } else
-            if (pil==7) {
+            if (pil==6) {
                 try {
                     test.loadModel("savedmodel.model");
                 } catch (Exception e) {
                     System.out.println("Gagal memuat.");
                     System.out.println(e);
                 }
+            } else
+            if (pil==7) {
+                try {
+                    test.createInstance();
+                } catch (Exception e) {
+                    System.out.println("Gagal membuat instans baru");
+                    System.out.println(e);
+                }
+            } else
+            if (pil==8) {
+                try {
+                    test.classifyInstance();
+                } catch (Exception e) {
+                    System.out.println("Gagal mengklasifikasi.");
+                    System.out.println(e);
+                }
             }
-        } while (pil!=8);
+            if (pil==0) {
+                test.printDataSet();
+            }
+        } while (pil!=9);
     }
 }
