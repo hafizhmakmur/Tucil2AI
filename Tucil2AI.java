@@ -141,18 +141,9 @@ public class Tucil2AI {
     public void classifyInstance() throws Exception {
         Scanner sc = new Scanner(System.in);
         Instances test = new Instances(dataset);
-/*
-        double[] values = new double[test.numAttributes()];
-        values[0] = sc.nextFloat();
-        values[1] = sc.nextFloat();
-        values[2] = sc.nextFloat();
-        values[3] = sc.nextFloat();
-        Instance inst = new DenseInstance(1.0, values);
-        test.add(inst);
-*/
+
         test.setClassIndex(test.numAttributes() - 1);
 
-        System.out.println(test.instance(test.numInstances()-1));
         double clsLabel = cls.classifyInstance(test.instance(test.numInstances()-1));
         test.instance(test.numInstances()-1).setClassValue(clsLabel);
         System.out.println(test.classAttribute().value((int) clsLabel));
