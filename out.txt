@@ -5,10 +5,11 @@ Silakan pilih satu:
 2. Filter Numeric to Nominal
 3. 10 Cross Folds Validation
 4. Full training Validation
-5. Instance baru
-6. Save model
-7. Load model
-8. Keluar
+5. Save model
+6. Load model
+7. Instance baru
+8. Pembelajaran
+9. Keluar
 Model loaded.
 Model is :
 J48 pruned tree
@@ -33,7 +34,21 @@ Silakan pilih satu:
 2. Filter Numeric to Nominal
 3. 10 Cross Folds Validation
 4. Full training Validation
-5. Instance baru
-6. Save model
-7. Load model
-8. Keluar
+5. Save model
+6. Load model
+7. Instance baru
+8. Pembelajaran
+9. Keluar
+5.9,3,5.1,1.8,Iris-virginica
+Iris-virginica
+
+Silakan pilih satu:
+1. Filter Discretize
+2. Filter Numeric to Nominal
+3. 10 Cross Folds Validation
+4. Full training Validation
+5. Save model
+6. Load model
+7. Instance baru
+8. Pembelajaran
+9. Keluar
